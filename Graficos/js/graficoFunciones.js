@@ -1,66 +1,78 @@
 const URL_API = 'http://localhost/ApiMetodos/quejas/';
-const calcularAPI = 'api_calculo_c.php';
+const listarAPI = 'graficoC.php';
 
-let grafico = null;
-
-async function calcularGrafico(fechaInicio, fechaFin) {
+export async function calcularGraficoC(fechaInicio, fechaFin) {
     try {
-        const response = await fetch(`${URL_API}${calcularAPI}`, {
+        const response = await fetch(`${URL_API}${listarAPI}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                fecha_inicio: fechaInicio,
-                fecha_fin: fechaFin
-            })
+            body: JSON.stringify({ fecha_inicio: fechaInicio, fecha_fin: fechaFin })
         });
 
         const data = await response.json();
-        return data;
+        if (data.message) {
+            alert(data.message);
+            return;
+        }
+
+        const quejas = data.quejas_por_dia;
+        const n = quejas.length;
+        const promedio = quejas.reduce((a, b) => a + b, 0) / n;
+        const LSC = promedio + 3 * Math.sqrt(promedio);
+        const LIC = Math.max(0, promedio - 3 * Math.sqrt(promedio));
+        let resultadosHTML = `<p><strong>Promedio (C):</strong> ${promedio.toFixed(2)}</p>`;
+        resultadosHTML += `<p><strong>Límite Superior de Control (LSC):</strong> ${LSC.toFixed(2)}</p>`;
+        resultadosHTML += `<p><strong>Límite Inferior de Control (LIC):</strong> ${LIC.toFixed(2)}</p>`;
+        
+
+        document.getElementById('resultados').innerHTML = resultadosHTML;
+
+        const ctx = document.getElementById('graficoC').getContext('2d');
+        if (window.grafico) window.grafico.destroy();
+        window.grafico = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: quejas.map((_, i) => i + 1),
+                datasets: [{
+                    label: 'Quejas por día',
+                    data: quejas,
+                    fill: false,
+                    borderWidth: 2
+                },
+                {
+                    label: 'LSC',
+                    data: new Array(n).fill(LSC),
+                    borderColor: 'red',
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0
+                },
+                {
+                    label: 'LIC',
+                    data: new Array(n).fill(LIC),
+                    borderColor: 'green',
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0
+                },
+                {
+                    label: 'Promedio',
+                    data: new Array(n).fill(promedio),
+                    borderColor: 'blue',
+                    borderDash: [2, 2],
+                    fill: false,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 
     } catch (error) {
         console.error('Error al calcular gráfico:', error);
     }
 }
-
-function dibujarGrafico(data) {
-    const ctx = document.getElementById('graficoC').getContext('2d');
-
-    if (grafico) {
-        grafico.destroy();
-    }
-
-    grafico = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['LCI', 'Promedio (𝑐̅)', 'LCS'],
-            datasets: [{
-                label: 'Quejas por Día',
-                data: [data.LCI, data.c_promedio, data.LCS],
-                borderColor: 'blue',
-                backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                tension: 0.3,
-                pointBackgroundColor: ['green', 'yellow', 'red'],
-                pointBorderWidth: 3,
-                fill: false
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                }
-            }
-        }
-    });
-}
-
-export { calcularGrafico, dibujarGrafico };
