@@ -1,7 +1,7 @@
 import { QuejaModel } from '../model/quejaModel.js';
 
 const URL_API = 'http://localhost/ApiMetodos/quejas/';
-const agregarAPI = 'registrar.php'; // Tu endpoint de registrar queja
+const agregarAPI = 'registrar.php'; 
 
 // ----------------------------------------------------------------------AGREGAR
 function crearQueja() {

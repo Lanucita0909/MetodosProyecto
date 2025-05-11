@@ -1,67 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Gráfico Tipo C - Quejas Taxis Red Top</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <title>Gráficos Tipo C & Pie – Atención de Quejas</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Estilos propios -->
+  <link href="style.css" rel="stylesheet">
+  <!-- Chart.js (defer para que espere al DOM) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <!-- Script de la aplicación -->
+  <script src="script.js" defer></script>
 </head>
-<body class="bg-light">
+<body>
 
-<header>
-    <!-- Navbar Bootstrap -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Taxi Quejas</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/quejas/View/quejaView.html">Registrar Queja</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/grafico_tipo_c_taxis_red_top/Graficos/View/graficoView.html">Ver Gráficos</a>
-            </li>
-          </ul>
-        </div>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-dark" href="#">
+        <i class="fas fa-taxi"></i> Taxi Quejas
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navMenu" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-dark" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="#">Registrar Queja</a></li>
+          <li class="nav-item"><a class="nav-link active text-dark" href="#">Ver Gráficos</a></li>
+        </ul>
       </div>
-    </nav>
-</header>
+    </div>
+  </nav>
 
-<main class="container my-5">
-    <h1 class="text-center mb-4">Gráfico Tipo C - Atención de Quejas</h1>
+  <!-- MAIN -->
+  <main class="container my-5">
 
-    <div class="card p-4 mb-4">
-        <div class="mb-3">
-            <label for="quejas" class="form-label">Cantidad de quejas por día:</label>
-            <textarea class="form-control" id="quejas" rows="5" placeholder="Ejemplo: 2, 0, 3, 1, 2, 4, 0"></textarea>
-        </div>
-        <div class="d-grid">
-            <button class="btn btn-primary" onclick="calcularGraficoC()">Calcular Gráfico C</button>
-        </div>
+    <!-- ALERTA CON EL PROMEDIO -->
+    <div id="alert-promedio" class="alert alert-warning rounded-pill shadow-sm d-none">
+      <strong>Tiempo promedio de atención:</strong>
+      <span id="promedio-text">—</span> días
     </div>
 
-    <div id="resultados" class="mb-4"></div>
-
-    <div class="card p-4">
-        <canvas id="graficoC" width="800" height="400"></canvas>
+    <!-- TARJETA DE ENTRADAS -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 mb-4">Datos de Atención de Quejas</h2>
+        <div class="row g-3 align-items-end">
+          <div class="col-md-3">
+            <label for="cantidad" class="form-label"># Quejas</label>
+            <input type="number" id="cantidad" class="form-control" min="1" placeholder="Ej. 5">
+          </div>
+          <div class="col-md-9 text-end">
+            <button class="btn btn-outline-warning me-2" onclick="generarTablaQuejas()">
+              <i class="fas fa-list"></i> Generar Tabla
+            </button>
+            <button class="btn btn-warning" onclick="calcularGraficoC()">
+              <i class="fas fa-chart-line"></i> Calcular Gráficos
+            </button>
+          </div>
+        </div>
+        <div id="tabla-container" class="mt-4"></div>
+      </div>
     </div>
-</main>
 
-<!-- Tu script personalizado -->
-<script src="script.js"></script>
+    <!-- TARJETA DEL GRÁFICO TIPO C -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 text-center mb-3">Gráfico Tipo C – Tiempo de Atención</h2>
+        <canvas id="graficoC"></canvas>
+      </div>
+    </div>
 
-<!-- Bootstrap 5 Bundle JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- NUEVA TARJETA DEL GRÁFICO DE PASTEL -->
+    <div class="card mb-5 shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 text-center mb-3">Gráfico de Pastel – Distribución de Tiempos</h2>
+        <canvas id="graficoPie"></canvas>
+      </div>
+    </div>
 
+  </main>
+
+  <footer class="text-center py-3 text-muted">
+    &copy; 2025 Taxi Red Top
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

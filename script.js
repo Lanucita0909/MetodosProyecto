@@ -1,61 +1,140 @@
+let graficoC, graficoPie;
+
+function generarTablaQuejas() {
+  const cantidad = parseInt(document.getElementById('cantidad').value);
+  if (isNaN(cantidad) || cantidad <= 0) {
+    alert("Por favor ingresa una cantidad válida de quejas.");
+    return;
+  }
+
+  const container = document.getElementById('tabla-container');
+  container.innerHTML = '';
+
+  const table = document.createElement('table');
+  table.className = 'table table-striped';
+
+  // Cabecera
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Tiempo de Atención (días)</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${Array.from({length: cantidad}, (_, i) =>
+        `<tr>
+          <td>${i+1}</td>
+          <td><input type="date" class="form-control fecha-input"></td>
+          <td><input type="number" class="form-control insuficiencia-input" min="0" placeholder="Ej. 5"></td>
+        </tr>`
+      ).join('')}
+    </tbody>
+  `;
+
+  container.appendChild(table);
+}
 
 function calcularGraficoC() {
-    const datosInput = document.getElementById('quejas').value;
-    const quejas = datosInput.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+  // Captura los valores numéricos
+  const tiempos = Array.from(document.querySelectorAll('.insuficiencia-input'))
+    .map(i => parseInt(i.value))
+    .filter(n => !isNaN(n));
 
-    const n = quejas.length;
-    const promedio = quejas.reduce((a, b) => a + b, 0) / n;
-    const LSC = promedio + 3 * Math.sqrt(promedio);
-    const LIC = Math.max(0, promedio - 3 * Math.sqrt(promedio));
+  if (tiempos.length === 0) {
+    alert("Debes ingresar al menos un 'Tiempo de Atención' válido.");
+    return;
+  }
 
-    let resultadosHTML = `<p><strong>Promedio (𝑐̄):</strong> ${promedio.toFixed(2)}</p>`;
-    resultadosHTML += `<p><strong>Límite Superior de Control (LSC):</strong> ${LSC.toFixed(2)}</p>`;
-    resultadosHTML += `<p><strong>Límite Inferior de Control (LIC):</strong> ${LIC.toFixed(2)}</p>`;
-    document.getElementById('resultados').innerHTML = resultadosHTML;
+  const n = tiempos.length;
+  const promedio = tiempos.reduce((a, b) => a + b, 0) / n;
+  const LSC = promedio + 3 * Math.sqrt(promedio);
+  const LIC = Math.max(0, promedio - 3 * Math.sqrt(promedio));
 
-    const ctx = document.getElementById('graficoC').getContext('2d');
-    if (window.grafico) window.grafico.destroy();
-    window.grafico = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: quejas.map((_, i) => i + 1),
-            datasets: [{
-                label: 'Quejas por día',
-                data: quejas,
-                fill: false,
-                borderWidth: 2
-            },
-            {
-                label: 'LSC',
-                data: new Array(n).fill(LSC),
-                borderColor: 'red',
-                borderDash: [5, 5],
-                fill: false,
-                pointRadius: 0
-            },
-            {
-                label: 'LIC',
-                data: new Array(n).fill(LIC),
-                borderColor: 'green',
-                borderDash: [5, 5],
-                fill: false,
-                pointRadius: 0
-            },
-            {
-                label: 'Promedio',
-                data: new Array(n).fill(promedio),
-                borderColor: 'blue',
-                borderDash: [2, 2],
-                fill: false,
-                pointRadius: 0
-            }]
+  // Mostrar alerta con promedio
+  const alertProm = document.getElementById('alert-promedio');
+  document.getElementById('promedio-text').textContent = promedio.toFixed(2);
+  alertProm.classList.remove('d-none');
+
+  // --- Gráfico Tipo C (línea) ---
+  const ctxC = document.getElementById('graficoC').getContext('2d');
+  if (graficoC) graficoC.destroy();
+  graficoC = new Chart(ctxC, {
+    type: 'line',
+    data: {
+      labels: tiempos.map((_, i) => `Muestra ${i+1}`),
+      datasets: [
+        {
+          label: 'Tiempo de Atención',
+          data: tiempos,
+          borderColor: '#007bff',
+          fill: false,
+          tension: 0.3
         },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+        {
+          label: 'LSC',
+          data: Array(n).fill(LSC),
+          borderColor: 'red',
+          borderDash: [5,5],
+          fill: false
+        },
+        {
+          label: 'LIC',
+          data: Array(n).fill(LIC),
+          borderColor: 'green',
+          borderDash: [5,5],
+          fill: false
+        },
+        {
+          label: 'Promedio',
+          data: Array(n).fill(promedio),
+          borderColor: 'orange',
+          borderDash: [2,2],
+          fill: false
         }
-    });
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Gráfico Tipo C - Control de Quejas' },
+        legend: { position: 'top' }
+      },
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'Días' } },
+        x: { title: { display: true, text: 'Muestra' } }
+      }
+    }
+  });
+
+  // --- Gráfico de Pastel (pie) ---
+  const total = tiempos.reduce((a,b)=>a+b,0);
+  const labelsPie = tiempos.map((t,i) => `Muestra ${i+1}`);
+  const dataPie = tiempos.map(t => parseFloat(((t/total)*100).toFixed(1)));
+
+  const ctxPie = document.getElementById('graficoPie').getContext('2d');
+  if (graficoPie) graficoPie.destroy();
+  graficoPie = new Chart(ctxPie, {
+    type: 'pie',
+    data: {
+      labels: labelsPie,
+      datasets: [{
+        data: dataPie,
+        // Chart.js asigna colores automáticamente si no se indican
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: { display: true, text: 'Porcentaje de Cada Tiempo de Atención' },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.label}: ${ctx.parsed}%`
+          }
+        },
+        legend: { position: 'right' }
+      }
+    }
+  });
 }
