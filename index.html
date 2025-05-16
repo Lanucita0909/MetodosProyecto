@@ -31,65 +31,206 @@
   
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link text-dark" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/index.html">Inicio</a></li>
           <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaView.html"">Registrar Queja</a></li>
-          <li class="nav-item"><a class="nav-link active text-dark" href="/grafico_tipo_c_taxis_red_top/Graficos/View/graficoView.html">Ver Gráficos</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaManualView.html"">Registrar Queja Manual</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- MAIN -->
-  <main class="container my-5">
 
-    <!-- ALERTA CON EL PROMEDIO -->
-    <div id="alert-promedio" class="alert alert-warning rounded-pill shadow-sm d-none">
-      <strong>Tiempo promedio de atención:</strong>
-      <span id="promedio-text">—</span> días
+  <!-- HERO SECTION -->
+  <section class="hero text-center">
+    <div class="container">
+      <h1 class="mb-4">Sistema de Control de Quejas</h1>
+      <p class="lead mb-5">
+        Implementación del Gráfico Tipo C para optimizar la atención de quejas y mejorar la satisfacción del cliente.
+      </p>
+      <a href="./quejas/View/quejaManualView.html" class="btn btn-light btn-lg px-4 shadow-sm">
+        <i class="fas fa-chart-bar me-2"></i> Ver Gráficos
+      </a>
     </div>
+  </section>
 
-    <!-- TARJETA DE ENTRADAS -->
-    <div class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h2 class="h5 mb-4">Datos de Atención de Quejas</h2>
-        <div class="row g-3 align-items-end">
-          <div class="col-md-3">
-            <label for="cantidad" class="form-label"># Quejas</label>
-            <input type="number" id="cantidad" class="form-control" min="1" placeholder="Ej. 5">
-          </div>
-          <div class="col-md-9 text-end">
-            <button class="btn btn-outline-warning me-2" onclick="generarTablaQuejas()">
-              <i class="fas fa-list"></i> Generar Tabla
-            </button>
-            <button class="btn btn-warning" onclick="calcularGraficoC()">
-              <i class="fas fa-chart-line"></i> Calcular Gráficos
-            </button>
+  <!-- MAIN CONTENT -->
+  <main class="container my-5">
+    
+    <!-- INTRO -->
+    <section class="row mb-5">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2 class="h3 mb-4">Gráfico Tipo C para Atención de Quejas</h2>
+        <p>
+          El sistema implementa un <strong>Gráfico de Control Tipo C</strong> para monitorear y mejorar los tiempos de atención de quejas recibidas por nuestro servicio de taxis. Este tipo de gráfico se utiliza específicamente para controlar el <em>número de defectos por unidad</em>, lo que en nuestro caso representa el tiempo en días que se tarda en resolver una queja de un cliente.
+        </p>
+        <p>
+          Basado en los principios de <strong>Modelado de Simulación</strong> del Capítulo 14 de la metodología Render, este enfoque nos permite:
+        </p>
+        <ul>
+          <li>Detectar patrones anormales en los tiempos de atención</li>
+          <li>Identificar causas especiales de variación</li>
+          <li>Establecer límites de control estadístico</li>
+          <li>Mejorar continuamente nuestro proceso de atención al cliente</li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h3 class="h5 card-title mb-3">Beneficios del Sistema</h3>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="text-center">
+                  <div class="feature-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                  </div>
+                  <h4 class="h6">Monitoreo en Tiempo Real</h4>
+                  <p class="small text-muted">Seguimiento continuo de nuestro desempeño en atención de quejas</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="text-center">
+                  <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                  </div>
+                  <h4 class="h6">Detección de Anomalías</h4>
+                  <p class="small text-muted">Identifica desviaciones significativas para intervenir oportunamente</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="text-center">
+                  <div class="feature-icon">
+                    <i class="fas fa-tasks"></i>
+                  </div>
+                  <h4 class="h6">Mejora de Procesos</h4>
+                  <p class="small text-muted">Optimización continua del servicio al cliente</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="text-center">
+                  <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <h4 class="h6">Análisis Estadístico</h4>
+                  <p class="small text-muted">Toma de decisiones basada en datos concretos</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div id="tabla-container" class="mt-4"></div>
       </div>
-    </div>
-
-    <!-- TARJETA DEL GRÁFICO TIPO C -->
-    <div class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h2 class="h5 text-center mb-3">Gráfico Tipo C – Tiempo de Atención</h2>
-        <canvas id="graficoC"></canvas>
+    </section>
+    
+    <!-- UNDERSTANDING THE TERMS -->
+    <section class="mb-5">
+      <h2 class="h3 mb-4 text-center">Comprensión de los Términos Clave</h2>
+      <p class="text-center mb-4">Estos son los principales conceptos utilizados en nuestro sistema de control estadístico:</p>
+      
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="term-box">
+            <h3 class="h5"><span class="term">LIC (Límite Inferior de Control)</span></h3>
+            <p>Es el límite estadístico inferior que representa el nivel mínimo aceptable para el tiempo de atención. Si el tiempo está por debajo de este límite, podría ser un indicador de un registro incorrecto o un proceso demasiado acelerado que podría comprometer la calidad de la atención.</p>
+            <p class="text-success fw-bold">Fórmula: LIC = max(0, Promedio - 3√Promedio)</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="term-box">
+            <h3 class="h5"><span class="term">LSC (Límite Superior de Control)</span></h3>
+            <p>Es el límite estadístico superior que representa el nivel máximo aceptable para el tiempo de atención. Si el tiempo excede este límite, indica un problema en el proceso que requiere investigación y acción correctiva inmediata.</p>
+            <p class="text-danger fw-bold">Fórmula: LSC = Promedio + 3√Promedio</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="term-box">
+            <h3 class="h5"><span class="term">LCL (Lower Control Limit)</span></h3>
+            <p>Es la nomenclatura en inglés para el Límite Inferior de Control (LIC). Representa el valor por debajo del cual cualquier observación se considera fuera de control estadístico.</p>
+            <p class="small text-muted">Nota: En nuestro sistema utilizamos principalmente el término LIC.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="term-box">
+            <h3 class="h5"><span class="term">UCL (Upper Control Limit)</span></h3>
+            <p>Es la nomenclatura en inglés para el Límite Superior de Control (LSC). Representa el valor por encima del cual cualquier observación se considera fuera de control estadístico.</p>
+            <p class="small text-muted">Nota: En nuestro sistema utilizamos principalmente el término LSC.</p>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <!-- NUEVA TARJETA DEL GRÁFICO DE PASTEL -->
-    <div class="card mb-5 shadow-sm">
-      <div class="card-body">
-        <h2 class="h5 text-center mb-3">Gráfico de Pastel – Distribución de Tiempos</h2>
-        <canvas id="graficoPie"></canvas>
+    </section>
+    
+    <!-- GRAPH EXAMPLE -->
+    <section class="mb-5">
+      <h2 class="h3 mb-4 text-center">Interpretación del Gráfico Tipo C</h2>
+      
+      <div class="graph-example">
+        <div class="row">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="/public/image.png" alt="Ejemplo de Gráfico Tipo C" class="img-fluid rounded">
+          </div>
+          <div class="col-lg-6">
+            <h3 class="h5 mb-3">¿Cómo interpretar los resultados?</h3>
+            <p>
+              El gráfico muestra los tiempos de atención (en días) para cada queja registrada. Los tres elementos clave son:
+            </p>
+            <ul>
+              <li><strong class="text-danger">Línea roja punteada (LSC)</strong>: Representa el límite superior de control. Puntos por encima de esta línea indican tiempos de atención excesivamente largos.</li>
+              <li><strong class="text-warning">Línea naranja punteada (Promedio)</strong>: Muestra el promedio general de los tiempos de atención.</li>
+              <li><strong class="text-success">Línea verde punteada (LIC)</strong>: Representa el límite inferior de control. Puntos por debajo de esta línea podrían indicar registros incorrectos.</li>
+            </ul>
+            <p>
+              Si la mayoría de los puntos se encuentran dentro de los límites de control y no muestran patrones sistemáticos, se considera que el proceso está bajo control estadístico.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-
+    </section>
+    
+    <!-- CALL TO ACTION -->
+    <section class="text-center py-5 my-5 bg-light rounded-3 shadow-sm">
+      <div class="container">
+        <h2 class="mb-4">Comienza a utilizar el sistema</h2>
+        <p class="lead mb-4">Mejora la calidad de atención al cliente con nuestro sistema de control estadístico</p>
+        <div class="d-flex justify-content-center gap-3">
+          <a href="quejas/View/quejaView.html" class="btn btn-outline-warning btn-lg">
+            <i class="fas fa-pen me-2"></i> Registrar Queja
+          </a>
+        </div>
+      </div>
+    </section>
+    
   </main>
-
-  <footer class="text-center py-3 text-muted">
-    &copy; 2025 Taxi Red Top
+  
+  <!-- FOOTER -->
+  <footer class="bg-dark">
+    <div class="container">
+      <div class="row py-4">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h5 class="text-light">Taxis Red Top</h5>
+          <p class="text-muted">Sistema de Control de Calidad basado en metodología Render para optimizar la atención al cliente.</p>
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h5 class="text-light">Enlaces Rápidos</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html"><i class="fas fa-home me-2"></i> Inicio</a></li>
+            <li><a href="quejas/View/quejaView.html"><i class="fas fa-comment-dots me-2"></i> Registrar Queja</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5 class="text-light">Contacto</h5>
+          <ul class="list-unstyled text-muted">
+            <li><i class="fas fa-map-marker-alt me-2"></i> Av. Principal #123</li>
+            <li><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
+            <li><i class="fas fa-envelope me-2"></i> info@taxisredtop.com</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="text-muted">
+      <div class="text-center py-3">
+        <p class="small text-muted mb-0">&copy; 2025 Taxis Red Top. Todos los derechos reservados.</p>
+      </div>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
