@@ -19,7 +19,7 @@ function generarTablaQuejas() {
       <tr>
         <th>ID</th>
         <th>Fecha</th>
-        <th>Tiempo de Atención (días)</th>
+        <th>Cantidad de errores</th>
       </tr>
     </thead>
     <tbody>
