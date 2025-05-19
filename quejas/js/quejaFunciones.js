@@ -1,7 +1,7 @@
 // quejaFunciones.js
 const form = document.getElementById("formQueja");
 const mensaje = document.getElementById("mensaje");
-const apiBase = "https://aliceblue-spoonbill-291009.hostingersite.com/quejas";
+const apiBase = "http://localhost/2025/ApiMetodos/quejas/";
 let chartC = null;
 let chartPie = null;
 let promedioAlert = document.getElementById("alert-promedio");
@@ -18,7 +18,8 @@ form.addEventListener("submit", async e => {
             descripcion: form.querySelector('#descripcion').value,
             categoria: form.querySelector('#categoria').value,
             puntuacion: form.querySelector('#puntuacion').value,
-            fecha_evento: form.querySelector('#fecha_evento').value
+            fecha_evento: form.querySelector('#fecha_evento').value,
+            costo_viaje: form.querySelector('#costo_viaje').value
         };
 
         // Mostrar mensaje de carga

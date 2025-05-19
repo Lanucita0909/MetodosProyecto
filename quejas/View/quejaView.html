@@ -28,9 +28,10 @@
         <div class="collapse navbar-collapse" id="navMenu">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link text-dark" href="/index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaView.html"">Registrar Queja</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaManualView.html"">Registrar Queja Manual</a></li>
-          </ul>
+          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaView.html">Registrar Queja</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaManualView.html">Registrar Queja Manual</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/Graficos/View/impactoView.html">Gráficos Impacto</a></li>
+        </ul>
         </div>
       </div>
     </nav>
@@ -81,6 +82,12 @@
               <input type="range" class="form-range" id="puntuacion" min="1" max="10" value="5"
                 oninput="document.getElementById('puntuacion_valor').innerText = 'Nivel de insatisfacción: ' + this.value">
               <div id="puntuacion_valor" class="text-center fw-bold">Nivel de insatisfacción: 5</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="costo_viaje" class="form-label fw-bold">Costo del viaje (₡):</label>
+              <input type="number" id="costo_viaje" min="0" step="any" class="form-control" placeholder="₡ Costo del viaje" required
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/^0+(?=\d)/, '');">
             </div>
 
             <div class="mb-3">

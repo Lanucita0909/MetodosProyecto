@@ -1,4 +1,4 @@
-const URL_API = 'http://localhost/ApiMetodos/quejas/';
+const URL_API = 'http://localhost/2025/ApiMetodos/quejas/';
 const listarAPI = 'graficoC.php';
 
 export async function calcularGraficoC(fechaInicio, fechaFin) {
