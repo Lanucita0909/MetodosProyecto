@@ -66,7 +66,7 @@ function calcularGraficoC() {
       labels: tiempos.map((_, i) => `Muestra ${i+1}`),
       datasets: [
         {
-          label: 'Tiempo de Atención',
+          label: 'Quejas Presentadas',
           data: tiempos,
           borderColor: '#007bff',
           fill: false,
@@ -127,7 +127,7 @@ function calcularGraficoC() {
     options: {
       responsive: true,
       plugins: {
-        title: { display: true, text: 'Porcentaje de Cada Tiempo de Atención' },
+        title: { display: true, text: 'Porcentaje de Cada Categoria' },
         tooltip: {
           callbacks: {
             label: ctx => `${ctx.label}: ${ctx.parsed}%`

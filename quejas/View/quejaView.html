@@ -1,152 +1,165 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <title>Registrar Queja – Taxi Red Top</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <!-- Estilos propios -->
-    <link href="/style.css" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <title>Registrar Queja – Taxi Red Top</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-  <body class="bg-light">
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning shadow-sm">
-      <div class="container">
-        <a class="navbar-brand fw-bold text-dark" href="#">
-          <i class="fas fa-taxi"></i> Taxi Quejas
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navMenu">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link text-dark" href="/index.html">Inicio</a></li>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <!-- Estilos propios -->
+  <link href="/style.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-dark" href="#">
+        <i class="fas fa-taxi"></i> Taxi Quejas
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-dark" href="/index.html">Inicio</a></li>
           <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaView.html">Registrar Queja</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaManualView.html">Registrar Queja Manual</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="/Graficos/View/impactoView.html">Gráficos Impacto</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaManualView.html">Registrar Queja
+              Manual</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/impactoView.html">Gráficos Impacto</a>
+          </li>
         </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="container my-5">
+    <!-- Formulario de queja -->
+    <div class="card shadow-sm mb-5">
+      <div class="card-header bg-warning text-dark text-center">
+        <h3 class="h5 mb-0">Registrar Queja de Taxi</h3>
+      </div>
+      <div class="card-body">
+        <form id="formQueja">
+          <div class="mb-3">
+            <label for="atendido_por" class="form-label fw-bold">Atendido por:</label>
+            <select class="form-select" id="atendido_por" required>
+              <option value="">Seleccione al Taxista</option>
+              <option value="Pedro Ramírez">Pedro Ramírez</option>
+              <option value="Luis Mora">Luis Mora</option>
+              <option value="Andrés Castillo">Andrés Castillo</option>
+              <option value="María González">María González</option>
+              <option value="José Vargas">José Vargas</option>
+              <option value="Patricia Solís">Patricia Solís</option>
+              <option value="Luis Navarro">Luis Navarro</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="descripcion" class="form-label fw-bold">Descripción:</label>
+            <input type="text" id="descripcion" class="form-control" placeholder="Ingrese la descripción" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="categoria" class="form-label fw-bold">Categoría de Queja:</label>
+            <select class="form-select" id="categoria" required>
+              <option value="">Seleccione</option>
+              <option value="Puntualidad">Puntualidad</option>
+              <option value="Atención del Conductor">Atención del Conductor</option>
+              <option value="Estado del Vehículo">Estado del Vehículo</option>
+              <option value="Condiciones del vehículo">Condiciones del vehículo</option>
+              <option value="Cobro Incorrecto">Cobro Incorrecto</option>
+              <option value="Ruta Inapropiada">Ruta Inapropiada</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="puntuacion" class="form-label fw-bold">Puntuación de la experiencia:</label>
+            <input type="range" class="form-range" id="puntuacion" min="1" max="10" value="5"
+              oninput="document.getElementById('puntuacion_valor').innerText = 'Nivel de insatisfacción: ' + this.value">
+            <div id="puntuacion_valor" class="text-center fw-bold">Nivel de insatisfacción: 5</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="costo_viaje" class="form-label fw-bold">Costo del viaje (₡):</label>
+            <input type="number" id="costo_viaje" min="0" step="any" class="form-control"
+              placeholder="₡ Costo del viaje" required
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/^0+(?=\d)/, '');">
+          </div>
+
+          <div class="mb-3">
+            <label for="fecha_evento" class="form-label fw-bold">Fecha del evento:</label>
+            <input type="date" class="form-control" id="fecha_evento" required>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-warning fw-bold">
+              <i class="fas fa-paper-plane"></i> Enviar Queja
+            </button>
+          </div>
+
+          <div id="mensaje" class="text-center mt-3 fw-bold"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Estadísticas -->
+    <div id="alert-promedio" class="alert alert-warning rounded-pill shadow-sm d-none">
+      <strong>Tiempo promedio de atención:</strong>
+      <span id="promedio-text">—</span> días
+    </div>
+
+    <!-- Tabla de quejas -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 mb-4">Datos de Atención de Quejas</h2>
+        <div id="tabla-container" class="mt-4">
+          <div class="alert alert-info">Cargando datos de quejas...</div>
         </div>
       </div>
-    </nav>
+    </div>
 
-    <!-- MAIN -->
-    <main class="container my-5">
-      <!-- Formulario de queja -->
-      <div class="card shadow-sm mb-5">
-        <div class="card-header bg-warning text-dark text-center">
-          <h3 class="h5 mb-0">Registrar Queja de Taxi</h3>
-        </div>
-        <div class="card-body">
-          <form id="formQueja">
-            <div class="mb-3">
-              <label for="atendido_por" class="form-label fw-bold">Atendido por:</label>
-              <select class="form-select" id="atendido_por" required>
-                <option value="">Seleccione al Taxista</option>
-                <option value="Pedro Ramírez">Pedro Ramírez</option>
-                <option value="Luis Mora">Luis Mora</option>
-                <option value="Andrés Castillo">Andrés Castillo</option>
-                <option value="María González">María González</option>
-                <option value="José Vargas">José Vargas</option>
-                <option value="Patricia Solís">Patricia Solís</option>
-                <option value="Luis Navarro">Luis Navarro</option>
-              </select>
-            </div>
+    <!-- Gráficos -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 text-center mb-3">Gráfico Tipo C – Quejas</h2>
 
-            <div class="mb-3">
-              <label for="descripcion" class="form-label fw-bold">Descripción:</label>
-              <input type="text" id="descripcion" class="form-control" placeholder="Ingrese la descripción" required>
-            </div>
-
-            <div class="mb-3">
-              <label for="categoria" class="form-label fw-bold">Categoría de Queja:</label>
-              <select class="form-select" id="categoria" required>
-                <option value="">Seleccione</option>
-                <option value="Puntualidad">Puntualidad</option>
-                <option value="Atención del Conductor">Atención del Conductor</option>
-                <option value="Estado del Vehículo">Estado del Vehículo</option>
-                <option value="Condiciones del vehículo">Condiciones del vehículo</option>
-                <option value="Cobro Incorrecto">Cobro Incorrecto</option>
-                <option value="Ruta Inapropiada">Ruta Inapropiada</option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label for="puntuacion" class="form-label fw-bold">Puntuación de la experiencia:</label>
-              <input type="range" class="form-range" id="puntuacion" min="1" max="10" value="5"
-                oninput="document.getElementById('puntuacion_valor').innerText = 'Nivel de insatisfacción: ' + this.value">
-              <div id="puntuacion_valor" class="text-center fw-bold">Nivel de insatisfacción: 5</div>
-            </div>
-
-            <div class="mb-3">
-              <label for="costo_viaje" class="form-label fw-bold">Costo del viaje (₡):</label>
-              <input type="number" id="costo_viaje" min="0" step="any" class="form-control" placeholder="₡ Costo del viaje" required
-                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/^0+(?=\d)/, '');">
-            </div>
-
-            <div class="mb-3">
-              <label for="fecha_evento" class="form-label fw-bold">Fecha del evento:</label>
-              <input type="date" class="form-control" id="fecha_evento" required>
-            </div>
-
-            <div class="d-grid">
-              <button type="submit" class="btn btn-warning fw-bold">
-                <i class="fas fa-paper-plane"></i> Enviar Queja
-              </button>
-            </div>
-
-            <div id="mensaje" class="text-center mt-3 fw-bold"></div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Estadísticas -->
-      <div id="alert-promedio" class="alert alert-warning rounded-pill shadow-sm d-none">
-        <strong>Tiempo promedio de atención:</strong>
-        <span id="promedio-text">—</span> días
-      </div>
-
-      <!-- Tabla de quejas -->
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h2 class="h5 mb-4">Datos de Atención de Quejas</h2>
-          <div id="tabla-container" class="mt-4">
-            <div class="alert alert-info">Cargando datos de quejas...</div>
+        <!-- Scroll horizontal si es necesario -->
+        <div class="overflow-auto">
+          <div style="width: 1300;"> <!-- Ajusta según necesidad -->
+            <canvas id="graficoC"></canvas>
           </div>
         </div>
+
       </div>
+    </div>
 
-      <!-- Gráficos -->
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h2 class="h5 text-center mb-3">Gráfico Tipo C – Tiempo de Atención</h2>
-          <canvas id="graficoC"></canvas>
-        </div>
+    <div class="card mb-5 shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 text-center mb-3">Gráfico de Pastel – Distribución de quejas por categoria</h2>
+        <canvas id="graficoPie"></canvas>
       </div>
+    </div>
+  </main>
 
-      <div class="card mb-5 shadow-sm">
-        <div class="card-body">
-          <h2 class="h5 text-center mb-3">Gráfico de Pastel – Distribución de Tiempos</h2>
-          <canvas id="graficoPie"></canvas>
-        </div>
-      </div>
-    </main>
+  <!-- FOOTER -->
+  <footer class="text-center py-3 text-muted">
+    &copy; 2025 Taxi Red Top
+  </footer>
 
-    <!-- FOOTER -->
-    <footer class="text-center py-3 text-muted">
-      &copy; 2025 Taxi Red Top
-    </footer>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <script src="../js/quejaFunciones.js"></script>
+</body>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.0.1/dist/chartjs-plugin-annotation.min.js"></script>
-    <script src="../js/quejaFunciones.js"></script>
-  </body>
 </html>

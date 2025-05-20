@@ -1,7 +1,7 @@
 // quejaFunciones.js
 const form = document.getElementById("formQueja");
 const mensaje = document.getElementById("mensaje");
-const apiBase = "http://localhost/2025/ApiMetodos/quejas/";
+const apiBase = "http://localhost/metodosApi/ApiMetodos/quejas";
 let chartC = null;
 let chartPie = null;
 let promedioAlert = document.getElementById("alert-promedio");
@@ -109,7 +109,7 @@ async function cargarGraficos() {
         // Mostrar ambos valores de LCL
         promedioAlert.innerHTML = `
             <strong>Promedio diario (c̄):</strong> ${cBar.toFixed(2)}<br>
-            <strong>LCL teórico:</strong> ${LCL_teorico.toFixed(2)} | <strong>LCL gráfico:</strong> ${LCL_grafico.toFixed(2)}<br>
+            <strong>LCL teórico:</strong> ${LCL_teorico.toFixed(2)} 
             <strong>UCL:</strong> ${UCL.toFixed(2)}<br>
             <strong>Total de quejas:</strong> ${total}
         `;
