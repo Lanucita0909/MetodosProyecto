@@ -45,7 +45,7 @@
 
     <!-- ALERTA CON EL PROMEDIO -->
     <div id="alert-promedio" class="alert alert-warning rounded-pill shadow-sm d-none">
-      <strong>Cantidad de errores:</strong>
+      <strong>Cantidad de errores en promedio :</strong>
       <span id="promedio-text">—</span> 
     </div>
 
@@ -55,7 +55,7 @@
         <h2 class="h5 mb-4">Datos de Atención de Quejas</h2>
         <div class="row g-3 align-items-end">
           <div class="col-md-3">
-            <label for="cantidad" class="form-label"># Quejas</label>
+            <label for="cantidad" class="form-label"># Muestras a consultar </label>
             <input type="number" id="cantidad" class="form-control" min="1" placeholder="Ej. 5">
           </div>
           <div class="col-md-9 text-end">
@@ -109,6 +109,51 @@
         <canvas id="graficoPie"></canvas>
       </div>
     </div>
+
+    <div class="card mt-4 shadow-sm border-warning">
+  <div class="card-header bg-warning text-dark">
+    <h5 class="mb-0"><i class="bi bi-info-circle-fill me-2"></i>Instrucciones de Uso</h5>
+  </div>
+  <div class="card-body">
+    <p>
+      Este módulo permite generar <strong>gráficos de control tipo C</strong> basados en el libro de Render. 
+      Para utilizarlo correctamente, sigue los siguientes pasos:
+    </p>
+    <ol>
+      <li>
+        <strong>Ingresa la cantidad de muestras</strong> que deseas analizar en el campo "# Muestras a consultar".
+      </li>
+      <li>
+        Haz clic en el botón <strong>"Generar Tabla"</strong> para crear una tabla editable.
+      </li>
+      <li>
+        En la tabla generada, ingresa la <strong>cantidad de errores o quejas por muestra</strong>.
+        <br>
+        <span class="text-danger">⚠️ Solo se permiten números enteros positivos. No se aceptan decimales ni valores negativos.</span>
+      </li>
+      <li>
+        El campo de <strong>fecha es opcional</strong> y puede completarse si se desea llevar un control por día.
+      </li>
+      <li>
+        Una vez completadas todas las muestras, haz clic en <strong>"Calcular Gráficos"</strong> para visualizar:
+        <ul>
+          <li>El <strong>Promedio</strong> de errores</li>
+          <li>El <strong>Límite Superior de Control (LSC)</strong></li>
+          <li>El <strong>Límite Inferior de Control (LIC)</strong> (si es menor que 0, se muestra como 0)</li>
+        </ul>
+      </li>
+      <li>
+        En el gráfico generado (pastel y C), puedes <strong>mostrar u ocultar líneas</strong> como el Promedio, LSC o LIC simplemente haciendo clic sobre su nombre en la leyenda del gráfico.
+        <br>
+        Esto te permite analizar únicamente los elementos que deseas visualizar.
+      </li>
+    </ol>
+    <p class="mb-0">
+      ✅ Asegúrate de completar todos los campos requeridos antes de generar los gráficos. El sistema no calculará si hay datos incompletos.
+    </p>
+  </div>
+</div>
+
 
   </main>
 
