@@ -1,0 +1,308 @@
+/* ================================
+   Estilos Generales y Fuente
+================================== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #212529;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  line-height: 1.6;
+}
+
+h2, h3, h5 {
+  color: #2c2f33;
+  font-weight: 600;
+  margin-bottom: 0.75em;
+}
+
+/* ================================
+   NAVBAR Estética Moderna
+================================== */
+.navbar.bg-warning {
+  background: linear-gradient(90deg, #f9d976 0%, #f39f48 100%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  color: #212529 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #343a40 !important;
+  transition: color 0.25s ease-in, transform 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #000 !important;
+  transform: scale(1.08);
+  text-decoration: underline;
+}
+
+/* ================================
+   Tarjetas
+================================== */
+.card {
+  border-radius: 16px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ================================
+   Botones
+================================== */
+.btn {
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 10px 22px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-warning {
+  background: linear-gradient(90deg, #f7c200, #ee9b00);
+  color: #fff;
+  border: none;
+}
+
+.btn-warning:hover {
+  background: #e48b00;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(228, 139, 0, 0.4);
+}
+
+.btn-outline-warning {
+  color: #ee9b00;
+  border-color: #ee9b00;
+  background-color: transparent;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ee9b00;
+  color: #fff;
+}
+
+/* ================================
+   Tabla y Gráfico
+================================== */
+.table-responsive {
+  border: 2px dashed #ffc107;
+  padding: 15px;
+  border-radius: 14px;
+  background: #ffffff;
+  animation: borderPulse 3s infinite;
+  overflow-x: auto;
+}
+
+canvas {
+  border-radius: 10px;
+  background: #ffffff;
+  border: 2px solid #ffc107;
+  padding: 10px;
+  max-width: 100%;
+}
+
+/* ================================
+   Animaciones
+================================== */
+@keyframes borderPulse {
+  0% { border-color: #ffc107; }
+  50% { border-color: #ff9800; }
+  100% { border-color: #ffc107; }
+}
+
+@keyframes flash {
+  0% { background-color: #fff3cd; }
+  100% { background-color: #ffeeba; }
+}
+
+/* ================================
+   Sección Explicativa
+================================== */
+section.bg-white {
+  border-left: 6px solid #ffc107;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(255, 193, 7, 0.1);
+  padding: 30px;
+}
+
+.text-warning {
+  color: #ee9b00 !important;
+  font-size: 2rem;
+}
+
+/* ================================
+   Alertas
+================================== */
+#alert-promedio {
+  font-size: 1.2rem;
+  background: #fff8e1;
+  border-left: 6px solid #f0a500;
+  padding: 16px 24px;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(240, 165, 0, 0.15);
+  animation: flash 1.5s infinite alternate;
+  word-wrap: break-word;
+}
+
+.fs-4 {
+  font-size: 1.75rem !important;
+  text-shadow: 1px 1px 2px #dddddd;
+}
+
+/* ================================
+   Modal
+================================== */
+.modal-content.border-warning {
+  border: 3px solid #ffc107;
+  border-radius: 16px;
+}
+
+.modal-header.bg-warning {
+  background: linear-gradient(90deg, #ffe259, #ffa751);
+  color: #212529;
+  font-weight: bold;
+  border-bottom: 2px solid #343a40;
+}
+
+.modal-body.bg-light {
+  background-color: #f8f9fa;
+}
+
+/* ================================
+   Footer
+================================== */
+footer {
+  background: #f8f9fa;
+  font-size: 0.95rem;
+  padding: 20px 0;
+  color: #6c757d;
+  border-top: 2px solid #ffc107;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+
+
+/* PARTE PARA EL INDEX */
+/* ================================
+   HERO SECTION
+================================== */
+.hero {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #fce679, #ffa751);
+  color: #212529;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.hero .lead {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ================================
+   ICONOS EN CARDS DE BENEFICIOS
+================================== */
+.feature-icon {
+  font-size: 2.5rem;
+  color: #f0a500;
+  margin-bottom: 10px;
+}
+
+/* ================================
+   TERM BOX
+================================== */
+.term-box {
+  background-color: #ffffff;
+  border-left: 6px solid #ffa751;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.term-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.term {
+  color: #f0a500;
+  font-weight: 600;
+}
+
+/* ================================
+   GRAPH EXAMPLE IMAGE
+================================== */
+.graph-example img {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.graph-example img:hover {
+  transform: scale(1.02);
+}
+
+/* ================================
+   SECTION SPACING & DIVIDERS
+================================== */
+section {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+section h2, section h3 {
+  font-weight: 600;
+}
+
+section:not(:last-child) {
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* ================================
+   CTA SECTION
+================================== */
+.bg-light.rounded-3.shadow-sm {
+  background: linear-gradient(to right, #ffffff, #fef3e7);
+  border: 2px dashed #ffc107;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.bg-light.rounded-3.shadow-sm:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   FOOTER ESTILIZADO
+================================== */
+footer.bg-dark {
+  background: #212529;
+}
+
+footer h5 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: #ffc107 !important;
+}
