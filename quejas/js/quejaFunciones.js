@@ -1,7 +1,7 @@
 // quejaFunciones.js
 const form = document.getElementById("formQueja");
 const mensaje = document.getElementById("mensaje");
-const apiBase = "http://localhost/metodosApi/ApiMetodos/quejas";
+const apiBase = "https://metodos-metodosapi-es6noa-e36110-145-223-74-28.traefik.me/quejas";
 let chartC = null;
 let chartPie = null;
 let promedioAlert = document.getElementById("alert-promedio");
