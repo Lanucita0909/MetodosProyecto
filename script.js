@@ -27,7 +27,7 @@ function generarTablaQuejas() {
         `<tr>
           <td>${i+1}</td>
           <td><input type="date" class="form-control fecha-input"></td>
-          <td><input type="number" class="form-control insuficiencia-input" min="0" placeholder="Ej. 5"></td>
+          <td><input type="number" class="form-control insuficiencia-input" min="0" step="1" oninput="validarNumero(this)" placeholder="Ej. 5"></td>
         </tr>`
       ).join('')}
     </tbody>
@@ -66,7 +66,7 @@ function calcularGraficoC() {
       labels: tiempos.map((_, i) => `Muestra ${i+1}`),
       datasets: [
         {
-          label: 'Tiempo de Atención',
+          label: 'Quejas Presentadas',
           data: tiempos,
           borderColor: '#007bff',
           fill: false,
@@ -127,7 +127,7 @@ function calcularGraficoC() {
     options: {
       responsive: true,
       plugins: {
-        title: { display: true, text: 'Porcentaje de Cada Tiempo de Atención' },
+        title: { display: true, text: 'Porcentaje de Cada Categoria' },
         tooltip: {
           callbacks: {
             label: ctx => `${ctx.label}: ${ctx.parsed}%`
@@ -137,4 +137,10 @@ function calcularGraficoC() {
       }
     }
   });
+}
+function validarNumero(input) {
+  // Eliminar puntos, comas y negativos inmediatamente
+  input.value = input.value
+    .replace(/[^\d]/g, '')       // Solo permite dígitos
+    .replace(/^0+(?=\d)/, '');   // Elimina ceros al inicio si hay más dígitos
 }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Análisis de Impacto – Taxi Red Top</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-dark" href="#">
+        <i class="fas fa-taxi"></i> Taxi Quejas
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navMenu" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-dark" href="/index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaView.html">Registrar Queja</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/quejaManualView.html">Registrar Queja Manual</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="/quejas/View/impactoView.html">Gráficos Impacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<main class="container my-5">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="h5 text-center mb-4">Análisis de Impacto por Conductor</h2>
+
+      <!-- Contenedor con scroll horizontal -->
+      <div class="overflow-auto">
+        <div style="width: 1300px;"> <!-- Puedes ajustar el ancho -->
+          <canvas id="graficoImpacto"></canvas>
+        </div>
+      </div>
+
+      <!-- Tabla responsiva -->
+      <div id="tablaImpacto" class="table-responsive mt-4"></div>
+    </div>
+  </div>
+</main>
+
+
+
+  <!-- Explicación del funcionamiento -->
+  <section class="container my-5 mb-5 p-4 bg-white shadow-sm rounded-3 border-start border-4 border-warning card shadow-sm">
+    <div class="d-flex flex-column flex-md-row align-items-center gap-4 ">
+      <div class="text-warning fs-1">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div>
+        <h2 class="h4 fw-bold">¿Cómo funciona este análisis?</h2>
+        <p class="mb-1">
+          Este panel muestra un <strong>análisis económico</strong> basado en las quejas registradas por los clientes de
+          Taxi Red Top.
+        </p>
+        <ul class="mb-1">
+          <li>Por cada <strong>3 quejas</strong>, se estima que se pierde un cliente.</li>
+          <li>Se calcula el <strong>costo promedio por viaje</strong> de cada conductor.</li>
+          <li>Multiplicando los clientes perdidos por ese costo, se estima la <strong>pérdida económica
+              potencial</strong>.</li>
+        </ul>
+        <p class="mb-0">
+          Esta información ayuda a identificar qué conductores podrían estar generando mayores pérdidas y a tomar
+          decisiones informadas para mejorar la calidad del servicio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+
+
+<!--MODAL DE DETALLES DE LOS TAXISTAS-->
+<div class="modal fade" id="modalDetalles" tabindex="-1" aria-labelledby="modalDetallesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content border-2 border-warning shadow">
+      
+      <!-- Encabezado amarillo -->
+      <div class="modal-header bg-warning text-dark border-bottom border-2 border-dark">
+        <h5 class="modal-title fw-bold" id="modalDetallesLabel">
+          🚕 Detalles del Conductor
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <!-- Cuerpo con fondo claro -->
+      <div class="modal-body bg-light" id="modalDetallesBody">
+        <p class="text-muted">Cargando detalles...</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+  <footer class="text-center py-3 text-muted">
+    &copy; 2025 Taxi Red Top
+  </footer>
+ <script src="/quejas/js/impactoFunciones.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</html>

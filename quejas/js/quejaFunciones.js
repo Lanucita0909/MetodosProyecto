@@ -1,7 +1,7 @@
 // quejaFunciones.js
 const form = document.getElementById("formQueja");
 const mensaje = document.getElementById("mensaje");
-const apiBase = "http://localhost/2025/ApiMetodos/quejas/";
+const apiBase = "http://localhost/metodosApi/ApiMetodos/quejas";
 let chartC = null;
 let chartPie = null;
 let promedioAlert = document.getElementById("alert-promedio");
@@ -108,9 +108,11 @@ async function cargarGraficos() {
 
         // Mostrar ambos valores de LCL
         promedioAlert.innerHTML = `
+        
             <strong>Promedio diario (c̄):</strong> ${cBar.toFixed(2)}<br>
-            <strong>LCL teórico:</strong> ${LCL_teorico.toFixed(2)} | <strong>LCL gráfico:</strong> ${LCL_grafico.toFixed(2)}<br>
-            <strong>UCL:</strong> ${UCL.toFixed(2)}<br>
+            <strong>LIC teórico:</strong> ${LCL_teorico.toFixed(2)} <br>
+            <strong>LIC RENDER:</strong> ${LCL_grafico.toFixed(2)} <br>
+            <strong>LSC:</strong> ${UCL.toFixed(2)}<br>
             <strong>Total de quejas:</strong> ${total}
         `;
         promedioAlert.classList.remove('d-none');
@@ -127,9 +129,9 @@ async function cargarGraficos() {
                 labels: fechas,
                 datasets: [
                     { label: '# Quejas/día', data: conteos, fill:false, borderColor:'rgba(75,192,192,1)', tension:0.2, pointRadius:4 },
-                    { label: 'LCL', data: fechas.map(()=>LCL_teorico), borderDash:[5,5], fill:false, borderColor:'rgba(255,99,132,1)', pointRadius:0 },
+                    { label: 'LIC', data: fechas.map(()=>LCL_grafico), borderDash:[5,5], fill:false, borderColor:'rgba(255,99,132,1)', pointRadius:0 },
                     { label: 'c̄', data: fechas.map(()=>cBar), borderDash:[2,2], fill:false, borderColor:'rgba(54,162,235,1)', pointRadius:0 },
-                    { label: 'UCL', data: fechas.map(()=>UCL), borderDash:[5,5], fill:false, borderColor:'rgba(255,206,86,1)', pointRadius:0 }
+                    { label: 'LSC', data: fechas.map(()=>UCL), borderDash:[5,5], fill:false, borderColor:'rgba(255,206,86,1)', pointRadius:0 }
                 ]
             },
             options: {
@@ -178,7 +180,22 @@ async function cargarGraficos() {
 function generarTablaQuejas(fechas, datos) {
     const cont = document.getElementById('tabla-container');
     const rows = fechas.map(f=>`<tr><td>${f}</td><td>${datos[f]}</td></tr>`).join('');
-    cont.innerHTML = `<div class='table-responsive'><table class='table table-striped'><thead><tr><th>Fecha</th><th>Cantidad</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+   cont.innerHTML = `
+                    <div class='table-responsive' style="max-height: 300px; overflow-y: auto;">
+                        <table class='table table-striped mb-0'>
+                        <thead class="table-light">
+                            <tr>
+                            <th>Fecha</th>
+                            <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rows}
+                        </tbody>
+                        </table>
+                    </div>
+                    `;
+
 }
 
 // Inicializar cuando el DOM esté cargado
