@@ -1,4 +1,4 @@
-const apiBase = "https://metodos-metodosapi-es6noa-e36110-145-223-74-28.traefik.me/quejas/";
+const apiBase = "https://metodos-taxiquejasapi-ecpwx2-da66ab-145-223-74-28.traefik.me/quejas/";
 let chartImpacto = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
