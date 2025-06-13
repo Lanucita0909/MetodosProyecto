@@ -3,7 +3,7 @@ let chartImpacto = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const res = await fetch(`${apiBase}/listar.php`);
+    const res = await fetch(`${apiBase}/listar`);
     const { records } = await res.json();
 
     if (!records || records.length === 0) {
@@ -155,7 +155,7 @@ chartImpacto = new Chart(ctx, {
 });
 async function verDetalles(nombre) {
   try {
-    const res = await fetch(`${apiBase}/listarNombre.php?nombre=${encodeURIComponent(nombre)}`);
+    const res = await fetch(`${apiBase}/listarNombre?nombre=${encodeURIComponent(nombre)}`);
     const { records } = await res.json();
 
     if (!records || records.length === 0) {
