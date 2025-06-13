@@ -26,7 +26,7 @@ form.addEventListener("submit", async e => {
         mensaje.innerText = '⌛ Enviando queja...';
         mensaje.classList.add('text-info');
 
-        const res = await fetch(`${apiBase}/registrar.php`, {
+        const res = await fetch(`${apiBase}/registrar`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ document.getElementById('puntuacion').addEventListener('input', function() {
 // 2) Carga datos y genera gráficos
 async function cargarGraficos() {
     try {
-        const res = await fetch(`${apiBase}/listar.php`, {
+        const res = await fetch(`${apiBase}/listar`, {
             mode: 'cors', // Explícitamente indicar modo CORS
             credentials: 'omit', // No enviar cookies para simplificar
         });
